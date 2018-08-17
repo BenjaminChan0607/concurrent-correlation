@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -18,7 +19,18 @@ public class ConcurrentCorrelationApplicationTests {
 
     @Test
     public void contextLoads() {
-        getAndSet();
+        setIfAbsent();
+//        getAndSet();
+    }
+
+    private void setIfAbsent() {
+        ValueOperations<String,String> valueOperations = redisTemplate.opsForValue();
+        boolean flag = valueOperations.setIfAbsent("1", "1");
+        System.out.println(flag);
+        System.out.println(valueOperations.get("1"));
+
+        System.out.println(valueOperations.setIfAbsent("1","2"));
+        System.out.println(valueOperations.get("1"));
     }
 
     public void getAndSet() {
