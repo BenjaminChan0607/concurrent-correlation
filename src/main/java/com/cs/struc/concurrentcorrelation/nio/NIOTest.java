@@ -19,6 +19,8 @@ package com.cs.struc.concurrentcorrelation.nio;
  * IO NIO的比较
  * IO : Stream Oriented , Blocking IO
  * NIO : Buffer Oriented , Non Blocking IO , Selectors
+ *
+ * 之前一个小型的npc是时候开始看了
  */
 public class NIOTest {
 
