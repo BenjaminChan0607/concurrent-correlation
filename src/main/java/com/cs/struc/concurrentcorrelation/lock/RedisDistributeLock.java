@@ -34,16 +34,22 @@ public class RedisDistributeLock implements DistributeLock {
         String expireTime = String.valueOf(System.currentTimeMillis() + timeout);
         boolean flag = valueOperations.setIfAbsent(key, expireTime);
         if (flag) {
+            //初次获取锁
+            System.out.println(Thread.currentThread().getName() + " 初次获取锁");
             return true;
         }
 
         String oldExpireTime = valueOperations.get(key);
         if (Long.valueOf(oldExpireTime) < System.currentTimeMillis()) {
             //锁已经超时了，准备重新获取锁
+            System.out.println(Thread.currentThread().getName() + " 锁已经超时了，准备重新获取锁");
             long newExpireTime = System.currentTimeMillis() + timeout;
             String currentExpireTime = valueOperations.getAndSet(key, String.valueOf(newExpireTime));
-            if (currentExpireTime.equals(oldExpireTime)) {
+            if (currentExpireTime == null || currentExpireTime.equals(oldExpireTime)) {
+                System.out.println(Thread.currentThread().getName() + " 锁超时后获取锁");
                 return true;
+            } else {
+                return false;
             }
         }
         return false;
@@ -64,11 +70,7 @@ public class RedisDistributeLock implements DistributeLock {
             log.info("lock is not exists");
             return;
         }
-
-        if (force) {
-            redisTemplate.delete(key);
-            return;
-        }
-
+        redisTemplate.delete(key);
+        System.out.println(Thread.currentThread().getName() + " delete key:" + key);
     }
 }
