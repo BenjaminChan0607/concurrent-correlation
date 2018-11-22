@@ -6,21 +6,21 @@ package com.cs.struc.concurrentcorrelation.test;
  * <p>
  * 线程间的通信经典案例，等待通知机制，模拟两个线程交替打印奇数和偶数
  * <p>
- *
+ * <p>
  * 调用wait(),notify(),notifyAll()的前提都是获取了对象的锁
  * 调用wait()方法后，线程会释放锁，进入WAITING状态
  * 从wait()方法返回的前提是调用notify()方法释放锁，从而wait()方法所在的线程获取锁
  * 调用notify()方法会将在等待队列中的线程移动到同步队列中，线程状态也变成阻塞的
- *
+ * <p>
  * join()方法利用的也是等待通知机制
  * join()方法会阻塞当前线程，直到方法的调用者执行完毕
- *
+ * <p>
  * CountDownLatch可以实现与join()方法同样的功能，并且更加灵活
  * CountDownLatch的await方法会阻塞当前线程，直到N变成零，如果没有变成零的话就会一直阻塞在那里
- *
  */
 public class WaitNotifyTest {
 
+    private static final int COUNT = 100;
     private volatile boolean flag = true;
     private volatile int num = 0;
 
@@ -44,7 +44,7 @@ public class WaitNotifyTest {
 
         @Override
         public void run() {
-            while (waitNotifyTest.num < 100) {
+            while (waitNotifyTest.num < COUNT) {
                 synchronized (WaitNotifyTest.class) {
                     if (waitNotifyTest.flag) {
                         System.out.println("OddNumber get lock,num:" + waitNotifyTest.num);
@@ -76,7 +76,7 @@ public class WaitNotifyTest {
 
         @Override
         public void run() {
-            while (waitNotifyTest.num < 100) {
+            while (waitNotifyTest.num < COUNT) {
                 synchronized (WaitNotifyTest.class) {
                     if (!waitNotifyTest.flag) {
                         System.out.println("EvenNumber get lock,num:" + waitNotifyTest.num);

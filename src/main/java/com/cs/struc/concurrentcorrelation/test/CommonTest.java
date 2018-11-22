@@ -1,6 +1,7 @@
 package com.cs.struc.concurrentcorrelation.test;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author benjaminChan
@@ -12,8 +13,44 @@ public class CommonTest {
         CommonTest commonTest = new CommonTest();
 //        testJoin();
 //        testStop();
-        commonTest.testCountDownLatch();
+//        commonTest.testCountDownLatch();
+        for (int i = 0; i < 10; i++) {
+            commonTest.testVolatile();
+        }
     }
+
+    private void testVolatile() {
+        Thread t0 = new Thread(new CountThread(), "t0");
+        Thread t1 = new Thread(new CountThread(), "t1");
+        Thread t2 = new Thread(new CountThread(), "t2");
+
+        t0.start();
+        t1.start();
+        t2.start();
+
+        try {
+            t0.join();
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("count:" + atomicInteger.getAndIncrement());
+    }
+
+    public class CountThread implements Runnable {
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 10000; i++) {
+                atomicInteger.getAndIncrement();
+            }
+        }
+    }
+
+    private volatile int count = 0;
+    private AtomicInteger atomicInteger = new AtomicInteger();
 
     private static final int THREAD_COUNT = 3;
     private CountDownLatch countDownLatch = new CountDownLatch(THREAD_COUNT);
