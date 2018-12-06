@@ -4,13 +4,10 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +26,7 @@ public class ThreadPoolConsumerController {
 
     @RabbitListener(queues = "thread_pool_test")
     @RabbitHandler
-    public void threadPoolConsumer(String json) {
+    public void threadPoolConsumerV2(String json) {
         Map<String, Object> map = (Map<String, Object>) JSON.parse(json);
         String appId = (String) map.get("appId");
         int userId = (int) map.get("userId");
@@ -43,7 +40,7 @@ public class ThreadPoolConsumerController {
                         result -= i;
                         result *= i;
                         result /= i;
-                        System.out.println("threadPoolConsumer " + result + "," + userId + "," + appId);
+                        log.info("threadPoolConsumer " + result + "," + userId + "," + appId);
                         try {
                             TimeUnit.MICROSECONDS.sleep(50);
                         } catch (InterruptedException e) {
@@ -53,7 +50,32 @@ public class ThreadPoolConsumerController {
                 }
             });
         } catch (Exception e) {
-            log.error("----threadPoolConsumer----",e);
+            log.error("----threadPoolConsumer----", e);
+        }
+    }
+
+//    @RabbitListener(queues = "thread_pool_test")
+//    @RabbitHandler
+    public void threadPoolConsumer(String json) {
+        Map<String, Object> map = (Map<String, Object>) JSON.parse(json);
+        String appId = (String) map.get("appId");
+        int userId = (int) map.get("userId");
+        try {
+            long result = 1024;
+            for (int i = 1; i < CALC_NUM; i++) {
+                result += i;
+                result -= i;
+                result *= i;
+                result /= i;
+                log.info("threadPoolConsumer " + result + "," + userId + "," + appId);
+                try {
+                    TimeUnit.MICROSECONDS.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            log.error("----threadPoolConsumer----", e);
         }
     }
 }
