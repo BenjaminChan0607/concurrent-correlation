@@ -32,7 +32,9 @@ public class StockOrderServiceImpl implements StockOrderService {
         StockDO stock = checkStock(sid);
 
         //扣库存
-//        saleStock(stock);
+//        synchronized (StockOrderServiceImpl.class) {
+//            saleStock(stock);
+//        }
         //乐观锁扣库存
         saleStockOptimistic(stock);
 

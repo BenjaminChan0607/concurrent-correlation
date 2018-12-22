@@ -23,7 +23,7 @@ public class LongEventMain {
         LongEventFactory factory = new LongEventFactory();
 
         // Specify the size of the ring buffer, must be power of 2.
-        int bufferSize = 2;
+        int bufferSize = 8;
 
         // Construct the Disruptor
         Disruptor<LongEvent> disruptor = new Disruptor<>(factory, bufferSize, executor);

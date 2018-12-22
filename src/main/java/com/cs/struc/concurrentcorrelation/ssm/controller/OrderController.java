@@ -40,7 +40,7 @@ public class OrderController {
     @RequestMapping("/createWrongOrder2")
     @ResponseBody
     public void createOptimisticLimitOrder() {
-        int count = 100;//10万并发
+        int count = 300;//10万并发
         CyclicBarrier cyclicBarrier = new CyclicBarrier(count);
         ExecutorService executorService = Executors.newFixedThreadPool(count);
         long now = System.currentTimeMillis();

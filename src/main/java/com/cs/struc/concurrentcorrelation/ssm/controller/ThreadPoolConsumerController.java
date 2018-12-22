@@ -24,8 +24,8 @@ public class ThreadPoolConsumerController {
     @Autowired
     private TaskExecutor executor;
 
-    @RabbitListener(queues = "thread_pool_test")
-    @RabbitHandler
+//    @RabbitListener(queues = "thread_pool_test")
+//    @RabbitHandler
     public void threadPoolConsumerV2(String json) {
         Map<String, Object> map = (Map<String, Object>) JSON.parse(json);
         String appId = (String) map.get("appId");
@@ -64,9 +64,6 @@ public class ThreadPoolConsumerController {
             long result = 1024;
             for (int i = 1; i < CALC_NUM; i++) {
                 result += i;
-                result -= i;
-                result *= i;
-                result /= i;
                 log.info("threadPoolConsumer " + result + "," + userId + "," + appId);
                 try {
                     TimeUnit.MICROSECONDS.sleep(50);

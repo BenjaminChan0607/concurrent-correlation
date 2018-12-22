@@ -1,5 +1,6 @@
 package com.cs.struc.concurrentcorrelation;
 
+import com.cs.struc.concurrentcorrelation.handler.*;
 import com.cs.struc.concurrentcorrelation.lock.UserAmountComponent;
 import com.cs.struc.concurrentcorrelation.ssm.controller.OrderController;
 import org.junit.Test;
@@ -42,10 +43,22 @@ public class ConcurrentCorrelationApplicationTests {
     public void contextLoads() throws InterruptedException {
 //        testConcurrent();
 //        testContinuous();
-//        testCountDownLatch();
+        testCountDownLatch();
 //        testExecutorService();
-        testCyclicBarrier();
+//        testCyclicBarrier();
+//         orderController.createOptimisticLimitOrder();
+//        testEventDriven();
 
+//        for (int i=0;i<10;i++) {
+//            orderController.createWrongOrder(1);
+//        }
+        TimeUnit.SECONDS.sleep(2);
+    }
+
+    private void testEventDriven() {
+        EventListenerManager.getInstance().listen(new LoginEvent(new LoginDTO()));
+        EventListenerManager.getInstance().listen(new RegisterEvent(new RegisterDTO()));
+        EventListenerManager.getInstance().listen(new LivenessEvent(new LivenessDTO()));
     }
 
     public class SSMTask implements Runnable {
