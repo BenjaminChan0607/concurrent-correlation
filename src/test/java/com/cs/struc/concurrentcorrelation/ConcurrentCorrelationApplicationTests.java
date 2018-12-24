@@ -43,7 +43,7 @@ public class ConcurrentCorrelationApplicationTests {
     public void contextLoads() throws InterruptedException {
 //        testConcurrent();
 //        testContinuous();
-        testCountDownLatch();
+//        testCountDownLatch();
 //        testExecutorService();
 //        testCyclicBarrier();
 //         orderController.createOptimisticLimitOrder();
@@ -52,7 +52,7 @@ public class ConcurrentCorrelationApplicationTests {
 //        for (int i=0;i<10;i++) {
 //            orderController.createWrongOrder(1);
 //        }
-        TimeUnit.SECONDS.sleep(2);
+//        TimeUnit.SECONDS.sleep(2);
     }
 
     private void testEventDriven() {
