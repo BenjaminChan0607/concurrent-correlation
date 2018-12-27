@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @date 2018/12/11 0011 下午 7:30
  */
 @Component
-public class LoginListener implements EventListener{
+public class LoginListener implements EventListener {
     @Override
     public void listen(Event event) {
         System.out.println(getClass().getSimpleName() + " listen event");

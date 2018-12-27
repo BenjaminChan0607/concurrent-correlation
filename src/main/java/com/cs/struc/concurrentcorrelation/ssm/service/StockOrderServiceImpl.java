@@ -46,9 +46,9 @@ public class StockOrderServiceImpl implements StockOrderService {
     }
 
     private void saleStockOptimistic(StockDO stock) {
-        int count = stockDao.updateStockByOptimistic(stock.getSale() + 1,stock.getVersion() + 1 ,stock.getSale(),stock.getVersion());
-        if (count == 0){
-            throw new RuntimeException("并发更新库存失败") ;
+        int count = stockDao.updateStockByOptimistic(stock.getSale() + 1, stock.getVersion() + 1, stock.getSale(), stock.getVersion());
+        if (count == 0) {
+            throw new RuntimeException("并发更新库存失败");
         }
     }
 

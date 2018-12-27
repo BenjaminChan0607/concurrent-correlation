@@ -4,7 +4,7 @@ package com.cs.struc.concurrentcorrelation.disruptor;
  * Function:
  *
  * @author crossoverJie
- *         Date: 2018/8/29 01:42
+ * Date: 2018/8/29 01:42
  * @since JDK 1.8
  */
 public class LongEvent {

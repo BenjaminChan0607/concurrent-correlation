@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * Function:
  *
  * @author crossoverJie
- *         Date: 2018/8/29 01:43
+ * Date: 2018/8/29 01:43
  * @since JDK 1.8
  */
 public class LongEventProducer {
@@ -27,7 +27,7 @@ public class LongEventProducer {
             LongEvent event = ringBuffer.get(sequence); // Get the entry in the Disruptor
             // for the sequence
             long aLong = bb.getLong(0);
-            LOGGER.info("product=[{}]",aLong);
+            LOGGER.info("product=[{}]", aLong);
             event.set(aLong);  // Fill with data
         } finally {
             ringBuffer.publish(sequence);

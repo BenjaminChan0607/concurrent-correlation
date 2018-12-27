@@ -37,7 +37,7 @@ public class TimeServerHandler implements Runnable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (in != null) {
                 try {
                     in.close();

@@ -19,7 +19,7 @@ public class ReentrantLockTest {
             //op
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             reentrantLock.unlock();
         }
     }

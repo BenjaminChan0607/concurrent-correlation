@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author benjaminChan
  * @date 2018/8/15 0015 上午 11:28
- *
+ * <p>
  * 准许一个或者多个线程等待其他线程完成操作
  */
 public class CountDownLatchTool {

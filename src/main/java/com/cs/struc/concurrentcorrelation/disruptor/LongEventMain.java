@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * Function:
  *
  * @author crossoverJie
- *         Date: 2018/8/29 01:45
+ * Date: 2018/8/29 01:45
  * @since JDK 1.8
  */
 public class LongEventMain {
@@ -40,7 +40,7 @@ public class LongEventMain {
         LongEventProducer producer = new LongEventProducer(ringBuffer);
 
         ByteBuffer bb = ByteBuffer.allocate(8);
-        for (long l = 0; l<10 ; l++) {
+        for (long l = 0; l < 10; l++) {
             bb.putLong(0, l);
             producer.onData(bb);
             //Thread.sleep(1000);

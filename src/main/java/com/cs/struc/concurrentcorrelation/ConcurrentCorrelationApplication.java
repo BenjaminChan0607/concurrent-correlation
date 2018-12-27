@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class ConcurrentCorrelationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ConcurrentCorrelationApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ConcurrentCorrelationApplication.class, args);
+    }
 }
