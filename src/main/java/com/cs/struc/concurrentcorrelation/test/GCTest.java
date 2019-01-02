@@ -1,7 +1,6 @@
 package com.cs.struc.concurrentcorrelation.test;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @author benjaminChan
@@ -10,9 +9,9 @@ import java.util.Random;
 public class GCTest {
 
     public static void main(String[] args) {
-        ArrayList list=new ArrayList();
+        ArrayList list = new ArrayList();
 
-        while(true)
+        while (true)
 
         {
 
