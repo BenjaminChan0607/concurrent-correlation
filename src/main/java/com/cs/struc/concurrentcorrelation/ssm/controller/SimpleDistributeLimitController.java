@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/12/24 0024 下午 2:45
  */
 @RestController
-public class TestController {
+public class SimpleDistributeLimitController {
 
     @Autowired
     private RedisTemplate redisTemplate;

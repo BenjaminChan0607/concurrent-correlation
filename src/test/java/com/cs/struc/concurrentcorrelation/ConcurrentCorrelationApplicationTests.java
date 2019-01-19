@@ -3,7 +3,7 @@ package com.cs.struc.concurrentcorrelation;
 import com.cs.struc.concurrentcorrelation.handler.*;
 import com.cs.struc.concurrentcorrelation.lock.UserAmountComponent;
 import com.cs.struc.concurrentcorrelation.ssm.controller.OrderController;
-import com.cs.struc.concurrentcorrelation.ssm.controller.TestController;
+import com.cs.struc.concurrentcorrelation.ssm.controller.SimpleDistributeLimitController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class ConcurrentCorrelationApplicationTests {
 //        testContinuous();
 //        testCountDownLatch();
 //        testExecutorService();
-        testCyclicBarrier();
+//        testCyclicBarrier();
 //         orderController.createOptimisticLimitOrder();
 //        testEventDriven();
 
@@ -58,7 +58,7 @@ public class ConcurrentCorrelationApplicationTests {
     }
 
     @Autowired
-    private TestController testController;
+    private SimpleDistributeLimitController simpleDistributeLimitController;
 
     private void testEventDriven() {
         EventListenerManager.getInstance().listen(new LoginEvent(new LoginDTO()));
@@ -79,7 +79,7 @@ public class ConcurrentCorrelationApplicationTests {
                 // 等待所有任务准备就绪
                 cyclicBarrier.await();
                 System.out.println(Thread.currentThread().getName() + "----start execute----");
-                testController.testDistributeLimit();
+                simpleDistributeLimitController.testDistributeLimit();
                 System.out.println(Thread.currentThread().getName() + "----finish execute----");
             } catch (Exception e) {
                 e.printStackTrace();
